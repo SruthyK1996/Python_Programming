@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <h1>WELCOME TO TSM</h1>
+    <title>Login</title>
+
+    
+</head>
+<body>
+    <body background="static/images/background.webp"></body>
+    <div class="form-container">
+        <header>
+            <h1>Login</h1>
+        </header>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <section>
+            <form method="post" action="{{ url_for('login') }}">
+                {{ form.csrf_token }}
+                <label for="email">Email:</label>
+                {{ form.email(class="form-control", autocomplete="off") }}
+                {% if form.email.errors %}
+                    <p class="error-message">{{ form.email.errors[0] }}</p>
+                {% endif %}
+                <label for="password">Password:</label>
+                {{ form.password(class="form-control", autocomplete="off") }}
+                {% if form.password.errors %}
+                    <p class="error-message">{{ form.password.errors[0] }}</p>
+                {% endif %}
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <footer>
+            <button onclick="window.location.href='{{ url_for('register') }}'">Register</button>
+        </footer>
+    </div>
+</body>
+</html>

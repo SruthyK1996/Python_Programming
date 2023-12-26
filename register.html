@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/register.css">
+    
+    <title>Register</title>
+    
+</head>
+<body>
+    <div class="form-container">
+        <h1>Register</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form method="post" action="{{ url_for('register') }}">
+            {{ form.csrf_token }}
+            <label for="username">Username:</label>
+            {{ form.username(class="form-control") }}
+            {% if form.username.errors %}
+                <p class="error-message">{{ form.username.errors[0] }}</p>
+            {% endif %}
+            <label for="email">Email:</label>
+            {{ form.email(class="form-control") }}
+            {% if form.email.errors %}
+                <p class="error-message">{{ form.email.errors[0] }}</p>
+            {% endif %}
+            <label for="password">Password:</label>
+            {{ form.password(class="form-control") }}
+            {% if form.password.errors %}
+                <p class="error-message">{{ form.password.errors[0] }}</p>
+            {% endif %}
+            <label for="confirm_password">Confirm Password:</label>
+            {{ form.confirm_password(class="form-control") }}
+            {% if form.confirm_password.errors %}
+                <p class="error-message">{{ form.confirm_password.errors[0] }}</p>
+            {% endif %}
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>
